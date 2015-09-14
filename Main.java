@@ -15,7 +15,7 @@ public class Main extends Application {
     GraphicsContext gc;
     final int HEIGHT = 480;
     final int WIDTH = 640;
-    Screen currScreen;
+    Screen current;
 
     @Override
     public void start(Stage primaryStage) {
@@ -24,7 +24,7 @@ public class Main extends Application {
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         root.getChildren().add(canvas);
         gc = canvas.getGraphicsContext2D();
-        currScreen = new ConfigScreen(this, scene);
+        current = new ConfigScreen(this, scene);
         new AnimationTimer() {
             public void handle(long gt) {
                 render(gc);
@@ -38,13 +38,13 @@ public class Main extends Application {
     public void render(GraphicsContext gc) {
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, WIDTH, HEIGHT);
+        current.draw(gc, WIDTH, HEIGHT);
         gc.setFill(Color.BLACK);
-        currScreen.draw(gc, WIDTH, HEIGHT);
     }
 
 
     public void switchScreen(Screen screen) {
-        currScreen = screen;
+        current = screen;
     }
 
     public static void main(String[] args) {
